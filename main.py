@@ -22,3 +22,15 @@ class AplikasiKalkulatorTabel:
         self.entry_fungsi = tk.Entry(self.frame_input, width=32, font=("Arial", 10))
         self.entry_fungsi.insert(0, "x**3 - x - 1")
         self.entry_fungsi.grid(row=0, column=1, pady=5)
+
+        # Input Batas Bawah (b)
+tk.Label(self.frame_input, text="Batas Bawah (b):", font=("Arial", 10)).grid(row=1, column=0, sticky="w", pady=5)
+self.entry_b = tk.Entry(self.frame_input, width=32, font=("Arial", 10))
+self.entry_b.insert(0, "1")
+self.entry_b.grid(row=1, column=1, pady=5)
+
+# Input Batas Atas (a)
+tk.Label(self.frame_input, text="Batas Atas (a):", font=("Arial", 10)).grid(row=2, column=0, sticky="w", pady=5)
+self.entry_a = tk.Entry(self.frame_input, width=32, font=("Arial", 10))
+self.entry_a.insert(0, "2")
+self.entry_a.grid(row=2, column=1, pady=5)
