@@ -1,14 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-'''
-Nantinya kalau semua bagian sudah siap, di file main.py 
-tinggal diimpor dan diintegrasikan seperti ini:
-
-from logika_tabel import hitung_metode_tabel
-from komponen_tabel import KomponenTabel, validasi_input
-'''
-
 def validasi_input(a_str, b_str, n_str):
     """
     Validasi masukan dari user:
@@ -37,7 +29,27 @@ class KomponenTabel:
         
         # Kolom tabel: Iterasi, Nilai x, dan Nilai f(x)
         self.columns = ("Iterasi", "x", "f(x)")
+
+        # Konfigurasi Tema Cyberpunk / Style Tabel
+        style = ttk.Style()
+        style.theme_use("clam")
         
+        # Style Bodi Tabel (Dark Midnight Violet)
+        style.configure("Treeview",
+                        background="#181a24",
+                        foreground="#e2e8f0",
+                        fieldbackground="#181a24",
+                        rowheight=26,
+                        font=("Segoe UI", 9))
+        
+        # Style Header Tabel (Deep Violet & Neon Cyan Text)
+        style.configure("Treeview.Heading",
+                        background="#2a1b40",
+                        foreground="#00f5ff",
+                        font=("Segoe UI", 10, "bold"),
+                        relief="flat")
+        style.map("Treeview.Heading", background=[('active', '#3d265c')])
+
         # Membuat Treeview (Tabel)
         self.tree = ttk.Treeview(self.frame, columns=self.columns, show="headings", height=10)
         
