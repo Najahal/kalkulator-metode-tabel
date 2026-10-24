@@ -1,19 +1,17 @@
 import tkinter as tk
 from tkinter import messagebox
-
-# Tunggu file dari yang lain, nanti tinggal hapus tanda '#' di bawah:
-# from logika_tabel import hitung_metode_tabel
-# from komponen_tabel import buat_tabel, validasi_input
+from logika_tabel import hitung_metode_tabel
+from komponen_tabel import KomponenTabel, validasi_input
 
 
 class AplikasiKalkulatorTabel:
     def __init__(self, root):
         self.root = root
         self.root.title("Kalkulator Metode Tabel - Komputasi Numerik")
-        self.root.geometry("580x560")
+        self.root.geometry("580x600")
         self.root.resizable(False, False)
 
-        # 1. Frame Input Data
+        # Frame Input Data
         self.frame_input = tk.Frame(self.root, padx=15, pady=15)
         self.frame_input.pack(fill="x")
 
@@ -54,19 +52,14 @@ class AplikasiKalkulatorTabel:
         )
         self.btn_hitung.grid(row=4, column=0, columnspan=2, pady=12)
 
-        # 2. Frame Container Tabel (Area tugas Kyandaru)
+        # Frame Container Tabel (Komponen dari Kyandaru)
         self.frame_tabel = tk.Frame(self.root, padx=15)
         self.frame_tabel.pack(fill="both", expand=True)
 
-        self.label_placeholder = tk.Label(
-            self.frame_tabel, 
-            text="[ Area Tabel Hasil Perhitungan ]", 
-            font=("Arial", 10, "italic"), 
-            fg="gray"
-        )
-        self.label_placeholder.pack(expand=True)
+        # Menginisialisasi komponen tabel
+        self.tabel = KomponenTabel(self.frame_tabel)
 
-        # 3. Frame Ringkasan Hasil (Area output akhir)
+        # Frame Ringkasan Hasil (Area output akhir)
         self.frame_hasil = tk.Frame(self.root, padx=15, pady=15)
         self.frame_hasil.pack(fill="x")
 
@@ -79,8 +72,43 @@ class AplikasiKalkulatorTabel:
         self.label_hasil.pack()
 
     def proses_hitung(self):
-        # Nanti diisi logika integrasi saat file anggota lain sudah selesai
-        messagebox.showinfo("Status GUI", "Layout GUI Utama Berhasil Dimuat!")
+        fungsi_str = self.entry_fungsi.get().strip()
+        b_str = self.entry_b.get().strip()
+        a_str = self.entry_a.get().strip()
+        n_str = self.entry_n.get().strip()
+
+        if not fungsi_str:
+            messagebox.showerror("Error Input", "Fungsi f(x) tidak boleh kosong!")
+            return
+
+        # Validasi input dari komponen_tabel.py
+        valid_data = validasi_input(a_str, b_str, n_str)
+        if valid_data is None:
+            return
+
+        a_val, b_val, n_val = valid_data
+
+        try:
+            # Perhitungan dari logika_tabel.py
+            hasil = hitung_metode_tabel(fungsi_str, b_val, a_val, n_val)
+
+            # Render data ke tabel Treeview
+            self.tabel.tampilkan_data(hasil["data_tabel"])
+
+            # Tampilkan ringkasan hasil
+            akar_x, fx = hasil["akar_terbaik"]
+            teks_hasil = f"Estimasi Akar Terbaik: x = {akar_x:.5f} | f(x) = {fx:.5f}"
+
+            if hasil["selang_akar"]:
+                (x1, _), (x2, _) = hasil["selang_akar"]
+                teks_hasil += f"\nAkar berada di selang [{x1:.5f}, {x2:.5f}]"
+            else:
+                teks_hasil += "\n(Tidak ada perubahan tanda f(x) / selang akar tidak ditemukan)"
+
+            self.label_hasil.config(text=teks_hasil, fg="#2b5c8f")
+
+        except Exception as e:
+            messagebox.showerror("Error Matematika", f"Gagal mengevaluasi fungsi f(x):\n{e}")
 
 
 if __name__ == "__main__":
