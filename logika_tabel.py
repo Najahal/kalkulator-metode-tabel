@@ -5,9 +5,14 @@ def hitung_metode_tabel(fungsi_str, val1, val2, n_subinterval):
     Menghitung pencarian akar fungsi menggunakan Metode Tabel.
     Memastikan perhitungan selalu berjalan menurun dari nilai maksimum ke minimum
     """
+
+    # Mengubah format input dari slide agar bisa dibaca Python
+    fungsi_str = fungsi_str.replace('^', '**')
+    fungsi_str = fungsi_str.replace('E', 'e')
+
     # Selalu ambil nilai terbesar sebagai awal (a) dan terkecil sebagai akhir (b)
-    a = min(float(val1), float(val2))
-    b = max(float(val1), float(val2))
+    a = float(val1)
+    b = float(val2)
     
     # Step size h berjalan menurun dari a ke b: h = (b - a) / N (hasilnya negatif)
     h = (b - a) / n_subinterval

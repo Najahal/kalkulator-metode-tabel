@@ -28,7 +28,7 @@ class KomponenTabel:
         self.frame = parent_frame
         
         # Kolom tabel disesuaikan dengan output logika_tabel.py yang baru
-        self.columns = ("Iterasi", "xi", "f(xi)", "f(xi+1)", "|f(xi)*f(xi+1)|")
+        self.columns = ("Iterasi", "xi", "f(xi)", "f(xi+1)", "|f(xi).f(xi+1)|")
 
         # Konfigurasi Tema Cyberpunk / Style Tabel
         style = ttk.Style()
@@ -55,11 +55,11 @@ class KomponenTabel:
         
         # Konfigurasi Heading & Lebar Kolom
         column_widths = {
-            "Iterasi": 60,
+            "Iterasi": 40,
             "xi": 100,
-            "f(xi)": 110,
-            "f(xi+1)": 110,
-            "|f(xi)*f(xi+1)|": 120
+            "f(xi)": 120,
+            "f(xi+1)": 120,
+            "|f(xi).f(xi+1)|": 120
         }
         
         for col in self.columns:
