@@ -32,17 +32,17 @@ class AplikasiKalkulatorTabel:
         self.entry_fungsi.insert(0, "x**3 - x - 7")
         self.entry_fungsi.grid(row=0, column=1, pady=4, ipady=3)
 
-        # Input Batas Bawah (b)
-        tk.Label(self.frame_input, text="Batas Bawah (b):", font=("Segoe UI", 10), bg=self.BG_CARD, fg=self.TEXT_LIGHT).grid(row=1, column=0, sticky="w", pady=4)
-        self.entry_b = tk.Entry(self.frame_input, width=30, font=("Segoe UI", 10), bg=self.ENTRY_BG, fg="white", insertbackground="white", relief="flat")
-        self.entry_b.insert(0, "2")
-        self.entry_b.grid(row=1, column=1, pady=4, ipady=3)
-
         # Input Batas Atas (a)
-        tk.Label(self.frame_input, text="Batas Atas (a):", font=("Segoe UI", 10), bg=self.BG_CARD, fg=self.TEXT_LIGHT).grid(row=2, column=0, sticky="w", pady=4)
+        tk.Label(self.frame_input, text="Batas Atas (a):", font=("Segoe UI", 10), bg=self.BG_CARD, fg=self.TEXT_LIGHT).grid(row=1, column=0, sticky="w", pady=4)
         self.entry_a = tk.Entry(self.frame_input, width=30, font=("Segoe UI", 10), bg=self.ENTRY_BG, fg="white", insertbackground="white", relief="flat")
         self.entry_a.insert(0, "3")
-        self.entry_a.grid(row=2, column=1, pady=4, ipady=3)
+        self.entry_a.grid(row=1, column=1, pady=4, ipady=3)
+
+        # Input Batas Bawah (b)
+        tk.Label(self.frame_input, text="Batas Bawah (b):", font=("Segoe UI", 10), bg=self.BG_CARD, fg=self.TEXT_LIGHT).grid(row=2, column=0, sticky="w", pady=4)
+        self.entry_b = tk.Entry(self.frame_input, width=30, font=("Segoe UI", 10), bg=self.ENTRY_BG, fg="white", insertbackground="white", relief="flat")
+        self.entry_b.insert(0, "2")
+        self.entry_b.grid(row=2, column=1, pady=4, ipady=3)
 
         # Input Jumlah Sub-interval (N)
         tk.Label(self.frame_input, text="Jumlah Sub-interval (N):", font=("Segoe UI", 10), bg=self.BG_CARD, fg=self.TEXT_LIGHT).grid(row=3, column=0, sticky="w", pady=4)
@@ -118,7 +118,8 @@ class AplikasiKalkulatorTabel:
 
             if hasil["selang_akar"]:
                 (x1, _), (x2, _) = hasil["selang_akar"]
-                teks_hasil += f"\nAkar berada di selang [{x1:.5f}, {x2:.5f}]"
+                iterasi_ke = hasil.get("iterasi_akar", "-")  # Mengambil info iterasi
+                teks_hasil += f"\nAkar berada di selang [{x1:.5f}, {x2:.5f}] (Iterasi ke-{iterasi_ke})"
             else:
                 teks_hasil += "\n(Tidak ada perubahan tanda f(x) / selang akar tidak ditemukan)"
 
