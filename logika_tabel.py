@@ -60,7 +60,7 @@ def hitung_metode_tabel(fungsi_str, val1, val2, n_subinterval):
             # Cek perubahan tanda f(x_i) * f(x_next) <= 0
             if fx_val * fx_next <= 0:
                 selang_akar = ((x_val, fx_val), (x_next, fx_next))
-                iterasi_akar = idx + 1
+                iterasi_akar = idx 
         else:
             fx_next = None
             mutlak_perkalian = 0.0
