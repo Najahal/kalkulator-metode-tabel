@@ -41,6 +41,7 @@ def hitung_metode_tabel(fungsi_str, val1, val2, n_subinterval):
     data_tabel = []
     selang_akar = None
     akar_terbaik = None
+    iterasi_akar = None
     min_fx = float('inf')
     
     for i in range(len(raw_data)):
