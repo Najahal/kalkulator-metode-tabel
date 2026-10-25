@@ -8,8 +8,8 @@ class AplikasiKalkulatorTabel:
     def __init__(self, root):
         self.root = root
         self.root.title("Kalkulator Metode Tabel")
-        self.root.geometry("600x780")
-        self.root.resizable(False, False)
+        self.root.geometry("980x620")
+        self.root.resizable(True, True)
 
         # Palet Warna Cyberpunk Neon
         self.BG_MAIN = "#0f111a"        # Dark Midnight
@@ -22,9 +22,18 @@ class AplikasiKalkulatorTabel:
         
         self.root.configure(bg=self.BG_MAIN)
 
+        # Container Utama (Membagi Kolom Kiri dan Kanan)
+        self.main_container = tk.Frame(self.root, bg=self.BG_MAIN)
+        self.main_container.pack(fill="both", expand=True, padx=15, pady=15)
+
+        # Pembagian sisi kiri berisi Input & Kesimpulan
+        self.frame_kiri = tk.Frame(self.main_container, bg=self.BG_MAIN, width=380)
+        self.frame_kiri.pack(side=tk.LEFT, fill="both", padx=(0, 10))
+        self.frame_kiri.pack_propagate(False)
+
         # Frame Input Data
-        self.frame_input = tk.Frame(self.root, bg=self.BG_CARD, padx=15, pady=12, highlightthickness=1, highlightbackground="#312e81")
-        self.frame_input.pack(side=tk.TOP, fill="x", padx=15, pady=10)
+        self.frame_input = tk.Frame(self.frame_kiri, bg=self.BG_CARD, padx=15, pady=12, highlightthickness=1, highlightbackground="#312e81")
+        self.frame_input.pack(side=tk.TOP, fill="x", pady=(0, 10))
 
         # Input Fungsi f(x)
         tk.Label(self.frame_input, text="Fungsi f(x):", font=("Segoe UI", 10, "bold"), bg=self.BG_CARD, fg=self.COLOR_CYAN).grid(row=0, column=0, sticky="w", pady=4)
@@ -70,28 +79,30 @@ class AplikasiKalkulatorTabel:
             cursor="hand2",
             command=self.proses_hitung
         )
-        self.btn_hitung.grid(row=5, column=0, columnspan=2, pady=10)
+        self.btn_hitung.grid(row=5, column=0, columnspan=2, pady=10, sticky="we")
 
-        # Frame Container Tabel (Komponen dari Kyandaru)
-        self.frame_tabel = tk.Frame(self.root, bg=self.BG_MAIN, padx=15)
-        self.frame_tabel.pack(side=tk.TOP, fill="both", expand=True)
-
-        # Menginisialisasi komponen tabel
-        self.tabel = KomponenTabel(self.frame_tabel)
-
-        # Frame Ringkasan Hasil
-        self.frame_hasil = tk.Frame(self.root, bg=self.BG_CARD, padx=15, pady=12, highlightthickness=1, highlightbackground="#312e81")
-        self.frame_hasil.pack(side=tk.BOTTOM, fill="x", padx=15, pady=10)
+        ## Frame Ringkasan Hasil
+        self.frame_hasil = tk.Frame(self.frame_kiri, bg=self.BG_CARD, padx=15, pady=12, highlightthickness=1, highlightbackground="#312e81")
+        self.frame_hasil.pack(side=tk.TOP, fill="both", expand=True)
 
         self.label_hasil = tk.Label(
             self.frame_hasil, 
             text="Masukkan data lalu klik HITUNG AKAR", 
-            font=("Segoe UI", 10, "bold"), 
+            font=("Segoe UI", 9, "bold"), 
             bg=self.BG_CARD,
             fg=self.COLOR_YELLOW,
-            justify="center"
+            justify="left",
+            anchor="nw",
+            wraplength=340
         )
-        self.label_hasil.pack()
+        self.label_hasil.pack(fill="both", expand=True)
+
+        # Pembagian Sisi Kanan untuk tabel hasil
+        self.frame_tabel = tk.Frame(self.main_container, bg=self.BG_MAIN)
+        self.frame_tabel.pack(side=tk.RIGHT, fill="both", expand=True)
+
+        # Inisialisasi komponen tabel
+        self.tabel = KomponenTabel(self.frame_tabel)
 
     def proses_hitung(self):
         fungsi_str = self.entry_fungsi.get().strip()
