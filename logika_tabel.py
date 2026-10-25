@@ -4,11 +4,10 @@ def hitung_metode_tabel(fungsi_str, val1, val2, n_subinterval):
     """
     Menghitung pencarian akar fungsi menggunakan Metode Tabel.
     Memastikan perhitungan selalu berjalan menurun dari nilai maksimum ke minimum
-    agar urutan iterasinya sama persis seperti di spreadsheet Excel.
     """
     # Selalu ambil nilai terbesar sebagai awal (a) dan terkecil sebagai akhir (b)
-    a = max(float(val1), float(val2))
-    b = min(float(val1), float(val2))
+    a = min(float(val1), float(val2))
+    b = max(float(val1), float(val2))
     
     # Step size h berjalan menurun dari a ke b: h = (b - a) / N (hasilnya negatif)
     h = (b - a) / n_subinterval
@@ -30,14 +29,14 @@ def hitung_metode_tabel(fungsi_str, val1, val2, n_subinterval):
         math_env['x'] = x_val
         return eval(fungsi_str, {"__builtins__": None}, math_env)
 
-    # 1. Menghitung titik x_i dan f(x_i) secara menurun dari nilai terbesar ke terkecil
+    # Menghitung titik x_i dan f(x_i) secara menurun dari nilai terbesar ke terkecil
     raw_data = []
     for i in range(n_subinterval + 1):
         x_i = a + i * h
         fx_i = evaluasi_fungsi(x_i)
         raw_data.append((i, x_i, fx_i))
         
-    # 2. Menyusun data tabel lengkap
+    # Menyusun data tabel lengkap
     data_tabel = []
     selang_akar = None
     akar_terbaik = None

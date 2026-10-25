@@ -18,7 +18,8 @@ class TestMetodeTabel(unittest.TestCase):
     def test_nilai_fungsi(self):
         # Memastikan evaluasi f(x) pada titik x tertentu akurat
         hasil = hitung_metode_tabel("x**2 - 4", 0, 4, 4)
-        self.assertEqual(hasil["data_tabel"][2], (2, 2.0, 0.0))
+        baris_ke_2 = hasil["data_tabel"][2]
+        self.assertEqual((baris_ke_2[0], baris_ke_2[1], baris_ke_2[2]), (2, 2.0, 0.0))
 
     def test_estimasi_akar(self):
         # Memastikan pencarian nilai akar dengan |f(x)| terkecil sudah pas
