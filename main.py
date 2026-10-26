@@ -158,7 +158,7 @@ class AplikasiKalkulatorTabel:
                     teks_kesimpulan += f"Karena |f(xi)| < |f(xi+1)| (|{fxi:.5f}| < |{fxi_plus_1:.5f}|), maka x = {xi:.5f} adalah penyelesaian\n(Penyelesaian ditemukan pada iterasi ke-{iterasi_ke})"
                 # bila tidak maka xi+1 adalah penyelesaian
                 else:
-                    teks_kesimpulan += f"Karena |f(xi)| > |f(xi+1)| (|{fxi:.5f}| > |{fxi_plus_1:.5f}|), maka x = {xi_plus_1:.5f} adalah penyelesaian\n(Penyelesaian ditemukan pada iterasi ke-{iterasi_ke})"
+                    teks_kesimpulan += f"Karena |f(xi)| > |f(xi+1)| (|{fxi:.5f}| > |{fxi_plus_1:.5f}|), maka x = {xi_plus_1:.5f} adalah penyelesaian\n\n(Penyelesaian ditemukan pada iterasi ke-{iterasi_ke + 1})"
 
             elif not akar_ditemukan:
                 teks_kesimpulan = "Kesimpulan:\nTidak ada penyelesaian (akar) yang ditemukan pada rentang ini."
