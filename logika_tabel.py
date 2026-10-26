@@ -6,7 +6,7 @@ def hitung_metode_tabel(fungsi_str, val1, val2, n_subinterval):
     Memastikan perhitungan selalu berjalan menurun dari nilai maksimum ke minimum
     """
 
-    # Mengubah format input dari slide agar bisa dibaca Python
+    # Mengubah format input agar bisa dibaca Python
     fungsi_str = fungsi_str.replace('^', '**')
     fungsi_str = fungsi_str.replace('E', 'e')
 
