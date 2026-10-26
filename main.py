@@ -7,7 +7,7 @@ from komponen_tabel import KomponenTabel, validasi_input
 class AplikasiKalkulatorTabel:
     def __init__(self, root):
         self.root = root
-        self.root.title("Kalkulator Metode Tabel")
+        self.root.title("Kalkulator Metode Tabel ala Nokia")
         self.root.geometry("980x620")
         self.root.resizable(True, True)
 
